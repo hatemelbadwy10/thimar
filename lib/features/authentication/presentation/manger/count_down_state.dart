@@ -1,6 +1,6 @@
 part of 'count_down_cubit.dart';
 
-@immutable
+
 abstract class CountDownState {}
 
 class CountDownInitial extends CountDownState {}

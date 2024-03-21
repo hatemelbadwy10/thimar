@@ -1,13 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thimar/core/utils/app_routers.dart';
-import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
-import 'package:thimar/core/widgets/custom_button.dart';
 import 'package:thimar/features/home/presentation/views/widgets/counter_widget.dart';
 import 'package:thimar/features/home/presentation/views/widgets/icon_widget.dart';
 import 'package:thimar/features/home/presentation/views/widgets/image_slider.dart';
@@ -185,7 +180,7 @@ class ProductDescriptionViewBody extends StatelessWidget {
                 padding:  EdgeInsets.only(right: 27.w, ),
                 child: Row(
                   children: [
-                    IconWidget(icon: Icon(Icons.shopping_cart), onPress: (){}),
+                    IconWidget(icon: const Icon(Icons.shopping_cart), onPress: (){}),
                     SizedBox(width:10.w),
                     Text('اضافة للسلة',
                       style: Styles.textStyle15.copyWith(

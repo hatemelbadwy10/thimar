@@ -6,6 +6,7 @@ import 'package:thimar/core/utils/themes.dart';
 ThemeData theme(BuildContext context) {
   return ThemeData(
       colorScheme: Theme.of(context).colorScheme.copyWith(
+          surfaceVariant: Colors.transparent,
           primary: kPrimaryColor,
           secondary: Colors.grey,
           primaryContainer: const Color(0xffEBF5E1)),

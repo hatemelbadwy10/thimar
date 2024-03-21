@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:meta/meta.dart';
 
 part 'count_down_state.dart';
 

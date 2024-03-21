@@ -9,12 +9,18 @@ import 'package:thimar/features/authentication/presentation/views/login_view.dar
 import 'package:thimar/features/authentication/presentation/views/new_password_view.dart';
 import 'package:thimar/features/authentication/presentation/views/sign_up_view.dart';
 import 'package:thimar/features/bottom_nav_bar/presentation/manger/nav_bar_cubit/navbar_cubit.dart';
-import 'package:thimar/features/bottom_nav_bar/presentation/views/widgets/bottom_nav_bar_body.dart';
-import 'package:thimar/features/home/manger/counter_cubit/counter_cubit.dart';
+import 'package:thimar/features/bottom_nav_bar/presentation/views/bottom_nav_bar.dart';
+import 'package:thimar/features/home/presentation/manger/counter_cubit/counter_cubit.dart';
 import 'package:thimar/features/home/presentation/views/cart_view.dart';
+import 'package:thimar/features/home/presentation/views/category_view.dart';
 import 'package:thimar/features/home/presentation/views/finish_order_view.dart';
 import 'package:thimar/features/home/presentation/views/home_view.dart';
+import 'package:thimar/features/home/presentation/views/my_orders_view.dart';
+import 'package:thimar/features/home/presentation/views/order_details__view.dart';
 import 'package:thimar/features/home/presentation/views/product_description_view.dart';
+import 'package:thimar/features/profile/presentation/views/about_view.dart';
+import 'package:thimar/features/profile/presentation/views/privacy_view.dart';
+import 'package:thimar/features/profile/presentation/views/profile_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
@@ -29,6 +35,12 @@ abstract class AppRouter {
   static const kProductDescriptionView = '/productDescriptionView';
   static const kCartView = '/cartView';
   static const kFinishOrderView='/finishOrderView';
+  static const kMyOrdersView='/myOrdersView';
+  static const kOrderDetailsView ='/orderDetailsView';
+  static const kCategoryView='/categoryView';
+  static const kProfileView ='/profileView';
+  static const kAboutView='/aboutView';
+  static const kPrivacyView='/privacyView';
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -74,7 +86,7 @@ abstract class AppRouter {
     GoRoute(
       path: '/kNavBar',
       builder: (context, state) => BlocProvider(
-          create: (context) => NavbarCubit(), child: const BottomNavBarBody()),
+          create: (context) => NavbarCubit(), child: const BottomNavBar()),
     ),
     GoRoute(
         path: '/productDescriptionView',
@@ -90,6 +102,29 @@ abstract class AppRouter {
       path: '/finishOrderView',
       builder: (context, state) => const FinishOrderView(),
     ),
-
+    GoRoute(
+      path: '/myOrdersView',
+      builder: (context, state) => const MyOrdersView(),
+    ),
+    GoRoute(
+      path: '/orderDetailsView',
+      builder: (context, state) => const OrderDetailsView(),
+    ),
+    GoRoute(
+      path: '/categoryView',
+      builder: (context, state) => const CategoryView(),
+    ),
+    GoRoute(
+      path: '/profileView',
+      builder: (context, state) => const ProfileView(),
+    ),
+    GoRoute(
+      path: '/aboutView',
+      builder: (context, state) => const AboutView(),
+    ),
+    GoRoute(
+      path: '/privacyView',
+      builder: (context, state) => const PrivacyView(),
+    ),
   ]);
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thimar/core/utils/app_routers.dart';
@@ -55,7 +54,99 @@ class ProductWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       color: Theme.of(context).colorScheme.primary),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showBottomSheet(context: context, builder: (BuildContext context){
+                        return Container(
+
+                          height: 220,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12))
+                          ),
+child: Padding(
+  padding: const EdgeInsets.all(12.0),
+  child: Column(
+    children: [
+      Row(
+        children: [
+          Container(
+            height: 16,
+            width: 16,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(12)
+            ),
+            child:  Icon(Icons.check,
+            color:Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          SizedBox(width: 12.w,),
+          Text('تم إضافة المنتج بنجاح',
+          style: Styles.textStyle14.copyWith(
+            fontWeight: FontWeight.bold
+          ),
+          ),
+        ],
+      ),
+      SizedBox(height:10.h),
+      const Divider(thickness: .5,),
+      Row(
+        children: [
+          SizedBox(
+              height:64.h,
+              width: 70.w,
+              child: Image.asset(AssetsData.tomato)),
+          SizedBox(width: 11.w,),
+          Column(children: [
+            Text('طماطم',
+            style: Styles.textStyle14,
+            ),
+            SizedBox(height: 5.h,),
+            Text('الكميه : 4',
+            style: Styles.textStyle14.copyWith(
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.w200
+            ),
+
+
+            ),
+            SizedBox(width: 11.w,),
+Text('150 رس',
+style: Styles.textStyle14,
+),
+
+          ],),
+
+        ],
+      ),
+      SizedBox(height: 8.h,),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomButton(onPress: (){}, btnText: 'التحويل إلى السلة',
+          height: 40.h,
+            width: 165.w,
+          ),
+          CustomButton(onPress: (){}, btnText: 'تصفح العروض',
+          btnColor: Colors.white,
+            btnTextColor: Theme.of(context).colorScheme.primary,
+            height: 40.h,
+            width: 165.w,
+          )
+        ],
+      )
+
+
+    ],
+  ),
+)
+                          ,
+                        );
+
+                      });
+
+                    },
                     icon: const Icon(Icons.add),
                     color: Colors.white,
                   ),

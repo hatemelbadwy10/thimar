@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:thimar/features/home/manger/counter_cubit/counter_cubit.dart';
+import 'package:thimar/features/home/presentation/manger/counter_cubit/counter_cubit.dart';
 import 'package:thimar/features/home/presentation/views/widgets/icon_widget.dart';
 class CounterWidget extends StatelessWidget {
   const CounterWidget({super.key,  this.height,  this.width, this.iconWidth, this.iconHeight,  this.iconSize, this.color});

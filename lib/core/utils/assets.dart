@@ -8,5 +8,6 @@ class AssetsData{
   static const test1='assets/images/test1.png';
   static const profile='assets/images/profile.png';
   static const finishOrder='assets/images/finish_order.png';
+  static const address ='assets/images/address.png';
 
 }

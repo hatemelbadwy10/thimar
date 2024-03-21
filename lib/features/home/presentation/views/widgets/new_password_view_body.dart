@@ -11,12 +11,12 @@ class NewPasswordViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _form =GlobalKey<FormState>() ;
+    final form =GlobalKey<FormState>() ;
 
     return  Padding(
       padding:  EdgeInsets.all(16.w),
       child: Form(
-        key: _form,
+        key: form,
         child: Column(
           children: [
             CustomHeader(headerText: 'نسيت كلمة المرور', secText: 'أدخل كلمة المرور الجديدة', column:
@@ -27,7 +27,7 @@ class NewPasswordViewBody extends StatelessWidget {
                 const CustomTextField(hint: 'تأكيد كلمة المرور', icon: Icon(FontAwesomeIcons.unlockKeyhole), validatorWord: 'كلمة المرور',),
                 SizedBox(height: 25.h,),
                 CustomButton(onPress: (){
-                  if(_form.currentState?.validate() ==true) {
+                  if(form.currentState?.validate() ==true) {
                    // GoRouter.of(context).push(AppRouter.kConfirmResetPassword);
                   }
                 }, btnText: 'تغيير كلمة المرور'),

@@ -23,20 +23,15 @@ class CartViewBody extends StatelessWidget {
                 onPress: () {
                   GoRouter.of(context).pop(AppRouter.kProductDescriptionView);
                 }),
-            SizedBox(
-              height: 400.h,
-              width: double.infinity,
-              child: Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0.h),
-                        child: const CartItemWidget(),
-                      );
-                    }),
-              ),
+            Expanded(
+              child: ListView.builder(
+                   itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0.h),
+                      child: const CartItemWidget(),
+                    );
+                  }),
             ),
             const CuponWidget(),
             SizedBox(
@@ -52,7 +47,8 @@ class CartViewBody extends StatelessWidget {
             ),
             CustomButton(onPress: () {
               GoRouter.of(context).push(AppRouter.kFinishOrderView);
-            }, btnText: 'اتمام الطلب')
+            }, btnText: 'اتمام الطلب'),
+            SizedBox(height: 20.h,)
           ],
         ),
       ),
