@@ -19,8 +19,15 @@ import 'package:thimar/features/home/presentation/views/my_orders_view.dart';
 import 'package:thimar/features/home/presentation/views/order_details__view.dart';
 import 'package:thimar/features/home/presentation/views/product_description_view.dart';
 import 'package:thimar/features/profile/presentation/views/about_view.dart';
+import 'package:thimar/features/profile/presentation/views/address_view.dart';
+import 'package:thimar/features/profile/presentation/views/all_financial_view.dart';
+import 'package:thimar/features/profile/presentation/views/contact_us_view.dart';
+import 'package:thimar/features/profile/presentation/views/personal_info_view.dart';
 import 'package:thimar/features/profile/presentation/views/privacy_view.dart';
 import 'package:thimar/features/profile/presentation/views/profile_view.dart';
+import 'package:thimar/features/profile/presentation/views/questions_view.dart';
+import 'package:thimar/features/profile/presentation/views/suggestions_view.dart';
+import 'package:thimar/features/profile/presentation/views/wallet_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
@@ -41,6 +48,16 @@ abstract class AppRouter {
   static const kProfileView ='/profileView';
   static const kAboutView='/aboutView';
   static const kPrivacyView='/privacyView';
+  static const kQuestionsView = '/questionsView';
+  static const kContactUsView ='/contactUsView';
+  static const kSuggestionsView='/suggestionsView';
+  static const kPersonalInfoView ='/personalInfoView';
+  static const kWalletView ='/walletView';
+  static const kAllFinancialView ='/allFinancialView';
+  static const kAddressView ='/addressView';
+
+
+
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -125,6 +142,34 @@ abstract class AppRouter {
     GoRoute(
       path: '/privacyView',
       builder: (context, state) => const PrivacyView(),
+    ),
+    GoRoute(
+      path: '/questionsView',
+      builder: (context, state) => const QuestionsView(),
+    ),
+    GoRoute(
+      path: '/contactUsView',
+      builder: (context, state) => const ContactUsView(),
+    ),
+    GoRoute(
+      path: '/suggestionsView',
+      builder: (context, state) => const SuggestionsView(),
+    ),
+    GoRoute(
+      path: '/personalInfoView',
+      builder: (context, state) => const PersonalInfoView(),
+    ),
+    GoRoute(
+      path: '/walletView',
+      builder: (context, state) => const WalletView(),
+    ),
+    GoRoute(
+      path: '/allFinancialView',
+      builder: (context, state) => const AllFinancialView(),
+    ),
+    GoRoute(
+      path: '/addressView',
+      builder: (context, state) => const AddressView(),
     ),
   ]);
 }

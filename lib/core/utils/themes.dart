@@ -5,7 +5,9 @@ import 'package:thimar/core/utils/themes.dart';
 
 ThemeData theme(BuildContext context) {
   return ThemeData(
+  dividerColor: Colors.transparent,
       colorScheme: Theme.of(context).colorScheme.copyWith(
+
           surfaceVariant: Colors.transparent,
           primary: kPrimaryColor,
           secondary: Colors.grey,
@@ -19,5 +21,15 @@ ThemeData theme(BuildContext context) {
       textTheme: Theme.of(context).textTheme.apply(
             bodyColor: kPrimaryColor,
             fontFamily: 'Tajawal',
-          ));
+          ),
+    expansionTileTheme: const ExpansionTileThemeData(
+
+      collapsedIconColor: kPrimaryColor,
+      collapsedTextColor: kPrimaryColor,
+      iconColor: kPrimaryColor,
+      textColor: kPrimaryColor,
+
+    )
+
+  );
 }

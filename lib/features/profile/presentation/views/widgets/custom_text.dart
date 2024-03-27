@@ -13,6 +13,6 @@ class CustomText extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w200
         )
-    );;
+    );
   }
 }

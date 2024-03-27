@@ -15,16 +15,26 @@ class ProfileViewBody extends StatelessWidget {
       children: [
         const ProfilePhotoWidget(),
         SizedBox(height: 19.h,),
-        ProfileListViewItem(title: 'البيانات الشخصية', icon: CupertinoIcons.person, onPress: (){}),
-        ProfileListViewItem(title: 'المحفظة', icon: Icons.wallet_outlined, onPress: (){}),
+        ProfileListViewItem(title: 'البيانات الشخصية', icon: CupertinoIcons.person, onPress: (){
+          GoRouter.of(context).push(AppRouter.kPersonalInfoView);
+        }),
+        ProfileListViewItem(title: 'المحفظة', icon: Icons.wallet_outlined, onPress: (){
+          GoRouter.of(context).push(AppRouter.kWalletView);
+        }),
         ProfileListViewItem(title: 'العناوين', icon: Icons.location_on_outlined, onPress: (){}),
         ProfileListViewItem(title: 'الدفع', icon: FontAwesomeIcons.dollarSign, onPress: (){}),
-        ProfileListViewItem(title: 'أسئلة متكررة', icon: Icons.question_mark_outlined, onPress: (){}),
+        ProfileListViewItem(title: 'أسئلة متكررة', icon: Icons.question_mark_outlined, onPress: (){
+          GoRouter.of(context).push(AppRouter.kQuestionsView);
+        }),
         ProfileListViewItem(title: 'سياسة الخصوصية', icon: Icons.check_box_outlined, onPress: (){
           GoRouter.of(context).push(AppRouter.kPrivacyView);
         }),
-        ProfileListViewItem(title: 'تواصل معنا', icon: Icons.phone_in_talk_rounded, onPress: (){}),
-        ProfileListViewItem(title: 'الشكاوي والأقتراحات', icon: FontAwesomeIcons.pencil, onPress: (){}),
+        ProfileListViewItem(title: 'تواصل معنا', icon: Icons.phone_in_talk_rounded, onPress: (){
+          GoRouter.of(context).push(AppRouter.kContactUsView);
+        }),
+        ProfileListViewItem(title: 'الشكاوي والأقتراحات', icon: FontAwesomeIcons.pencil, onPress: (){
+          GoRouter.of(context).push(AppRouter.kSuggestionsView);
+        }),
         ProfileListViewItem(title: 'مشاركة التطبيق', icon: Icons.share_outlined, onPress: (){}),
         ProfileListViewItem(title: 'عن التطبيق', icon: FontAwesomeIcons.exclamation, onPress: (){
           GoRouter.of(context).push(AppRouter.kAboutView);

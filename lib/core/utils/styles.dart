@@ -42,6 +42,10 @@ abstract class Styles {
       fontSize: 11.sp,
       fontWeight: FontWeight.bold
   );
+  static final textStyle24 = TextStyle(
+      fontSize: 24.sp,
+      fontWeight: FontWeight.bold
+  );
 }
 
 const TextStyle textStyle = TextStyle();
