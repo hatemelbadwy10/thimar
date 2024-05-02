@@ -4,14 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
+import 'package:thimar/features/home/data/models/categorys_model.dart';
+import 'package:thimar/features/home/presentation/views/category_view.dart';
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key});
+  const CategoryItem({super.key, required this.data});
+  final CategoryData data;
 
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
       onTap: (){
-        GoRouter.of(context).push(AppRouter.kCategoryView);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  CategoryView(id: data.id)),
+        );
+
+
       },
       child: Padding(
         padding:  EdgeInsets.symmetric(horizontal: 9.w),
@@ -31,13 +39,13 @@ class CategoryItem extends StatelessWidget {
         height: 37.h,
                   width: 37.h
                   ,
-                  child: Image.asset(
-                     AssetsData.vegetable,
+                  child: Image.network(
+                     data.media
                   ),
                 ),
               ),
             ),
-            Text('الخضار',
+            Text(data.name,
             style: Styles.textStyle20.copyWith(
               color: Colors.black
             ),

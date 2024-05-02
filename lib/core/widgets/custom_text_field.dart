@@ -11,8 +11,9 @@ class CustomTextField extends StatelessWidget {
       this.textInputType,
       required this.validatorWord,
       this.color,
-      this.fill});
+      this.fill,  this.controller});
   final String hint;
+  final TextEditingController? controller;
   final Icon icon;
   final bool? obscureText;
   final TextInputType? textInputType;
@@ -25,6 +26,7 @@ class CustomTextField extends StatelessWidget {
       //  height: 60.h,
       width: double.infinity,
       child: TextFormField(
+        controller: controller,
         obscureText: obscureText ?? false,
         validator: (value) => value!.isEmpty ? ' ادخل $validatorWord ' : null,
         keyboardType: textInputType ?? TextInputType.text,

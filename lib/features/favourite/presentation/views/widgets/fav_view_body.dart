@@ -35,8 +35,8 @@ class FavViewBody extends StatelessWidget {
                   crossAxisCount: 2
               ),
                   itemBuilder: (context,index){
-                return const ProductWidget();
-              
+               // return const ProductWidget();
+              return SizedBox();
                   }),
             )
           ],

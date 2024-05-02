@@ -7,8 +7,8 @@ import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_text_field.dart';
 
 class NumLogin extends StatelessWidget {
-  const NumLogin({super.key});
-
+  const NumLogin({super.key,  this.controller});
+final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -45,12 +45,14 @@ class NumLogin extends StatelessWidget {
             ),
           ),
         ),
-        const Expanded(
+         Expanded(
           child: CustomTextField(
+
             textInputType: TextInputType.number,
             hint: 'رقم الجوال',
-            icon: Icon(FontAwesomeIcons.phoneFlip),
+            icon: const Icon(FontAwesomeIcons.phoneFlip),
             validatorWord: 'رقم الهاتف',
+            controller: controller,
           ),
         )
       ],

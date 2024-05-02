@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_button.dart';
 import 'package:thimar/core/widgets/custom_check_account.dart';
 import 'package:thimar/core/widgets/custom_text_field.dart';
 import 'package:thimar/core/widgets/num_login.dart';
+import 'package:thimar/features/authentication/presentation/manger/login_bloc/login_bloc.dart';
 import 'package:thimar/features/authentication/presentation/views/widgets/custom_header.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -16,7 +19,7 @@ class LoginViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final form = GlobalKey<FormState>();
-
+    final bloc = KiwiContainer().resolve<LoginBloc>();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
       child: Form(
@@ -29,15 +32,18 @@ class LoginViewBody extends StatelessWidget {
                 column: Column(
                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const NumLogin(),
+                    NumLogin(
+                      controller: bloc.phoneNumberController,
+                    ),
                     SizedBox(
                       height: 16.h,
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                       hint: 'كلمة المرور',
                       obscureText: true,
-                      icon: Icon(FontAwesomeIcons.unlockKeyhole),
+                      icon: const Icon(FontAwesomeIcons.unlockKeyhole),
                       validatorWord: 'كلمة المرور',
+                      controller: bloc.passwordController,
                     ),
                     SizedBox(
                       height: 20.h,
@@ -57,13 +63,28 @@ class LoginViewBody extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                    CustomButton(
-                        btnText: 'تسجيل الدخول',
-                        onPress: () {
-                          if (form.currentState?.validate() == true) {
-                            GoRouter.of(context).pushReplacement(AppRouter.kNavBar);
-                          }
-                        }),
+                    BlocBuilder(
+                      bloc: bloc,
+                      builder: (context, state) {
+                        if (state is LoginLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return CustomButton(
+                              btnText: 'تسجيل الدخول',
+                              onPress: () {
+                                if (form.currentState!.validate()) {
+                                  bloc.add(
+                                    LoginUserDataEvent(),
+                                  );
+
+
+                                }
+                              });
+                        }
+                      },
+                    ),
                     SizedBox(
                       height: 45.h,
                     ),
@@ -77,8 +98,7 @@ class LoginViewBody extends StatelessWidget {
                           btnText: 'تسجيل الدخول'),
                     )
                   ],
-                )
-            ),
+                )),
           ],
         ),
       ),

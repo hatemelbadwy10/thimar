@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-class RatingWidget extends StatelessWidget {
-  const RatingWidget({super.key});
 
+import '../../../data/models/product_rate_model.dart';
+class RatingWidget extends StatelessWidget {
+  const RatingWidget({super.key, required this.ratingData});
+final RatingData ratingData;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -20,17 +22,22 @@ class RatingWidget extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10.0),
               child: Row(
                 children: [
-                Text('محمد علي',
+                Text(ratingData.clientName,
                 style: Styles.textStyle16.copyWith(
                   color: Colors.black,
                 ),
                 ),
                 SizedBox(width: 7.w,),
                 RatingBar.builder(
+                  initialRating: ratingData.value,
+                  minRating:
+                  ratingData.value,
+                  maxRating:
+                  ratingData.value,
                     itemCount: 5,
                     itemSize: 20,
                     unratedColor: Colors.grey,
-                    minRating: 1,
+
                     allowHalfRating: true,
                     direction: Axis.horizontal,
                     itemBuilder: (context, _) => const Icon(
@@ -45,8 +52,7 @@ class RatingWidget extends StatelessWidget {
               ],
               ),
             ),
-            Text('هذا النص هو مثال '
-                '',
+            Text(ratingData.comment,
             style: Styles.textStyle14.copyWith(
               overflow:TextOverflow.ellipsis,
               color: Theme.of(context).colorScheme.secondary
@@ -58,7 +64,7 @@ class RatingWidget extends StatelessWidget {
           SizedBox(
               height: 55.h,
               width: 55.w,
-              child: Image.asset(AssetsData.profile)),
+              child: Image.network(ratingData.clientImage)),
         ],
       ),
     );

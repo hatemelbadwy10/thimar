@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/widgets/custom_button.dart';
 import 'package:thimar/core/widgets/custom_check_account.dart';
 import 'package:thimar/core/widgets/custom_text_field.dart';
 import 'package:thimar/core/widgets/num_login.dart';
+import 'package:thimar/features/authentication/presentation/manger/register_bloc/register_bloc.dart';
 import 'package:thimar/features/authentication/presentation/views/widgets/custom_header.dart';
 
 class SignUpViewBody extends StatefulWidget {
@@ -18,6 +21,7 @@ class SignUpViewBody extends StatefulWidget {
 
 class _SignUpViewBodyState extends State<SignUpViewBody> {
   final _form = GlobalKey<FormState>();
+  final bloc = KiwiContainer().resolve<RegisterBloc>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,50 +37,67 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 column: Expanded(
                   child: ListView(
                     children: [
-                      const CustomTextField(
+                      CustomTextField(
                         hint: 'اسم المستخدم',
-                        icon: Icon(FontAwesomeIcons.user),
+                        icon: const Icon(FontAwesomeIcons.user),
                         validatorWord: 'اسم المستخدم',
+                        controller: bloc.fullNameController,
                       ),
                       SizedBox(
                         height: 16.h,
                       ),
-                      const NumLogin(),
+                      NumLogin(
+                        controller: bloc.phoneNumberController,
+                      ),
                       SizedBox(
                         height: 16.h,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
                         hint: 'المدينة',
-                        icon: Icon(FontAwesomeIcons.flag),
+                        icon: const Icon(FontAwesomeIcons.flag),
                         validatorWord: 'المدينة',
+                        controller: bloc.countryController,
                       ),
                       SizedBox(
                         height: 16.h,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
                         hint: 'كلمة المرور',
-                        icon: Icon(FontAwesomeIcons.unlockKeyhole),
+                        icon: const Icon(FontAwesomeIcons.unlockKeyhole),
                         validatorWord: 'كلمة المرور',
+                        controller: bloc.passwordController,
                       ),
                       SizedBox(
                         height: 16.h,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
                         hint: 'تاكيد كلمة المرور',
-                        icon: Icon(FontAwesomeIcons.unlockKeyhole),
+                        icon: const Icon(FontAwesomeIcons.unlockKeyhole),
                         validatorWord: 'كلمة المرور',
+                        controller: bloc.passwordConfirm,
                       ),
                       SizedBox(
                         height: 24.h,
                       ),
-                      CustomButton(
-                          onPress: () {
-                            if (_form.currentState?.validate() == true) {
-                              GoRouter.of(context)
-                                  .push(AppRouter.kConfirmPhoneSignUp);
-                            }
-                          },
-                          btnText: 'تسجيل'),
+                      BlocBuilder(
+                        bloc: bloc,
+                        builder: (context, state) {
+                          if (State is RegisterLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return CustomButton(
+                                onPress: () {
+                                  if (_form.currentState?.validate() == true) {
+                                    GoRouter.of(context)
+                                        .push(AppRouter.kConfirmPhoneSignUp);
+                                  }
+                                },
+                                btnText: 'تسجيل');
+                          }
+                        },
+                      ),
                       SizedBox(
                         height: 45.h,
                       ),

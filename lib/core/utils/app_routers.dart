@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thimar/features/authentication/presentation/manger/count_down_cubit.dart';
+import 'package:thimar/core/widgets/helper_methods.dart';
+import 'package:thimar/features/authentication/presentation/manger/count_down_cubit/count_down_cubit.dart';
 import 'package:thimar/features/authentication/presentation/views/confirm_phone_number_login_view.dart';
 import 'package:thimar/features/authentication/presentation/views/confirm_phone_number_reset_password_view.dart';
 import 'package:thimar/features/authentication/presentation/views/forget_password_view.dart';
@@ -59,12 +60,16 @@ abstract class AppRouter {
 
 
 
-  static final router = GoRouter(routes: [
+  static final router = GoRouter(
+
+      navigatorKey: navigatorKey,
+      routes: [
     GoRoute(
       path: '/',
       builder: (context, state) => const SplashView(),
     ),
     GoRoute(
+
       path: kLoginView,
       builder: (context, state) => const LoginView(),
     ),
@@ -107,9 +112,11 @@ abstract class AppRouter {
     ),
     GoRoute(
         path: '/productDescriptionView',
+
         builder: (context, state) => BlocProvider(
             create: (context) => CounterCubit(),
-            child: const ProductDescriptionView())),
+            child:  ProductDescriptionView(id:1))),
+
     GoRoute(
       path: '/cartView',
       builder: (context, state) => BlocProvider(
@@ -129,7 +136,8 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: '/categoryView',
-      builder: (context, state) => const CategoryView(),
+      builder: (context, state) => const CategoryView(id: 1,),
+
     ),
     GoRoute(
       path: '/profileView',

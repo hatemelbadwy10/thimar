@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thimar/core/utils/assets.dart';
+import 'package:thimar/core/utils/cach_helper.dart';
 
 import '../../../../../core/utils/app_routers.dart';
 
@@ -20,7 +21,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void navigateToHomeView() {
     Future.delayed(const Duration(seconds: 3), () {
+      if(CacheHelper.getToken().isNotEmpty){
+        GoRouter.of(context).replace(AppRouter.kNavBar);
+      }
+      else{
       GoRouter.of(context).replace(AppRouter.kLoginView);
+      }
+
     });
   }
 

@@ -5,14 +5,22 @@ import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_button.dart';
+import 'package:thimar/features/home/data/models/product_model.dart';
+
+import '../product_description_view.dart';
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget({super.key});
+  final GetProductsData getProductsData;
+  const ProductWidget({super.key, required this.getProductsData});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        GoRouter.of(context).push(AppRouter.kProductDescriptionView);
+        // GoRouter.of(context).push(AppRouter.kProductDescriptionView);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ProductDescriptionView(id: getProductsData.id)),
+        );
       },
       child: SizedBox(
         height: 300.h,
@@ -32,7 +40,7 @@ class ProductWidget extends StatelessWidget {
                         bottomRight: Radius.circular(12))),
                 child: Center(
                   child: Text(
-                    '45%',
+                    getProductsData.discount.toString(),
                     style: Styles.textStyle14.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -42,13 +50,13 @@ class ProductWidget extends StatelessWidget {
             SizedBox(
                 height: 117.h,
                 width: double.infinity,
-                child: Image.asset(AssetsData.tomato)),
+                child: Image.network(getProductsData.mainImage)),
             const Align(
                 alignment: Alignment.topRight, child: Text(' السعر / 1كجم')),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('رس 45'),
+                 Text(getProductsData.title.toString()),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -96,14 +104,14 @@ child: Padding(
           SizedBox(
               height:64.h,
               width: 70.w,
-              child: Image.asset(AssetsData.tomato)),
+              child: Image.network(getProductsData.mainImage)),
           SizedBox(width: 11.w,),
           Column(children: [
-            Text('طماطم',
+            Text(getProductsData.title,
             style: Styles.textStyle14,
             ),
             SizedBox(height: 5.h,),
-            Text('الكميه : 4',
+            Text(getProductsData.amount.toString(),
             style: Styles.textStyle14.copyWith(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w200
@@ -112,7 +120,7 @@ child: Padding(
 
             ),
             SizedBox(width: 11.w,),
-Text('150 رس',
+Text(getProductsData.price.toString(),
 style: Styles.textStyle14,
 ),
 
