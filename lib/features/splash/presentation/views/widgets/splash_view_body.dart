@@ -27,6 +27,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       else{
       GoRouter.of(context).replace(AppRouter.kLoginView);
       }
+     // GoRouter.of(context).replace(AppRouter.kNavBar);
 
     });
   }

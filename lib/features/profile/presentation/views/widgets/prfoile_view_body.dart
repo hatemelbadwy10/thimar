@@ -1,14 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/app_routers.dart';
+import 'package:thimar/features/profile/presentation/manger/logout_bloc/logout_bloc.dart';
+import 'package:thimar/features/profile/presentation/views/profile_view.dart';
 import 'package:thimar/features/profile/presentation/views/widgets/profile_list__view_item.dart';
 import 'package:thimar/features/profile/presentation/views/widgets/profile_photo_widget.dart';
-class ProfileViewBody extends StatelessWidget {
+
+import '../../../../../core/widgets/helper_methods.dart';
+class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
 
+  @override
+  State<ProfileViewBody> createState() => _ProfileViewBodyState();
+}
+final bloc = KiwiContainer().resolve<LogoutBloc>();
+class _ProfileViewBodyState extends State<ProfileViewBody> {
   @override
   Widget build(BuildContext context) {
     return  ListView(
@@ -41,6 +52,29 @@ class ProfileViewBody extends StatelessWidget {
         }),
         ProfileListViewItem(title: 'الشروط والأحكام', icon: Icons.newspaper_rounded, onPress: (){}),
         ProfileListViewItem(title: 'تقييم التطبيق', icon: Icons.star_border_outlined, onPress: (){}),
+        ProfileListViewItem(title: 'تسجيل الخروج', icon: Icons.logout, onPress: (){
+          bloc.add(SendLogoutEvent());
+          BlocBuilder(
+          bloc: bloc,
+          builder: (BuildContext context, state) {
+            if(state is LogoutLoading){
+              return Center(child: CircularProgressIndicator(),);
+            }
+            else {
+
+              GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+              return Padding(
+                  padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 16.w,
+                  vertical: 10.h,
+              ),
+              );
+            }
+            },
+          );
+
+        }
+        ),
       ],
     );
   }

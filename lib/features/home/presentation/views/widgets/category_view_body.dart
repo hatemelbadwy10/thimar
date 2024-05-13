@@ -6,6 +6,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/widgets/custom_text_field.dart';
 import 'package:thimar/features/home/data/models/categorys_model.dart';
+import 'package:thimar/features/home/presentation/manger/add_product_to_cart_bloc/add_product_to_cart_bloc.dart';
 import 'package:thimar/features/home/presentation/manger/catgeory_product_bloc/category_product_bloc.dart';
 import 'package:thimar/features/home/presentation/manger/catgeory_product_bloc/category_product_event.dart';
 import 'package:thimar/features/home/presentation/manger/catgeory_product_bloc/category_product_state.dart';
@@ -97,16 +98,23 @@ void _getData(){
 }
 
 
-class CategoryProductWidget extends StatelessWidget {
+class CategoryProductWidget extends StatefulWidget {
   final ProductsData getProductsData;
   const CategoryProductWidget({super.key, required this.getProductsData});
+  
+
+  @override
+  State<CategoryProductWidget> createState() => _CategoryProductWidgetState();
+}
+final bloc = KiwiContainer().resolve<AddProductToCartBloc>();
+class _CategoryProductWidgetState extends State<CategoryProductWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  ProductDescriptionView(id: getProductsData.id)),
+          MaterialPageRoute(builder: (context) =>  ProductDescriptionView(id: widget.getProductsData.id, isFavourite: widget.getProductsData.isFavorite,)),
         );
       },
       child: SizedBox(
@@ -127,7 +135,7 @@ class CategoryProductWidget extends StatelessWidget {
                         bottomRight: Radius.circular(12))),
                 child: Center(
                   child: Text(
-                    getProductsData.discount.toString(),
+                   "${widget.getProductsData.discount*100 }%",
                     style: Styles.textStyle14.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -137,13 +145,14 @@ class CategoryProductWidget extends StatelessWidget {
             SizedBox(
                 height: 117.h,
                 width: double.infinity,
-                child: Image.network(getProductsData.mainImage)),
-            const Align(
-                alignment: Alignment.topRight, child: Text(' السعر / 1كجم')),
+                child: Image.network(widget.getProductsData.mainImage)),
+             Align(
+                alignment: Alignment.topRight,
+                child: Text(widget.getProductsData.title)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(getProductsData.title.toString()),
+                Text(' السعر / 1كجم'),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -191,14 +200,15 @@ class CategoryProductWidget extends StatelessWidget {
                                     SizedBox(
                                         height:64.h,
                                         width: 70.w,
-                                        child: Image.network(getProductsData.mainImage)),
+                                        child: Image.network(widget.getProductsData.mainImage)),
                                     SizedBox(width: 11.w,),
                                     Column(children: [
-                                      Text(getProductsData.title,
+                                      Text(widget.getProductsData.title,
                                         style: Styles.textStyle14,
                                       ),
                                       SizedBox(height: 5.h,),
-                                      Text(getProductsData.amount.toString(),
+                                      Text(
+                                        "  الكميه: ${widget.getProductsData.unit} ",
                                         style: Styles.textStyle14.copyWith(
                                             color: Theme.of(context).colorScheme.secondary,
                                             fontWeight: FontWeight.w200
@@ -207,7 +217,7 @@ class CategoryProductWidget extends StatelessWidget {
 
                                       ),
                                       SizedBox(width: 11.w,),
-                                      Text(getProductsData.price.toString(),
+                                      Text(widget.getProductsData.price.toString(),
                                         style: Styles.textStyle14,
                                       ),
 
@@ -230,7 +240,8 @@ class CategoryProductWidget extends StatelessWidget {
                                       width: 165.w,
                                     )
                                   ],
-                                )
+                                ),
+                                Text(widget.getProductsData.price.toString())
 
 
                               ],
@@ -249,14 +260,27 @@ class CategoryProductWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.h),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: CustomButton(
-                  onPress: () {},
-                  btnText: 'اضف للسلة',
-                  width: 200.w,
-                  height: 40.h),
-            )
+            BlocBuilder(
+              bloc: bloc,
+  builder: (context, state) {
+   if(state is AddProductToCartLoading){
+     return CircularProgressIndicator();
+
+   }
+   else{
+     return Padding(
+       padding: const EdgeInsets.symmetric(horizontal: 24),
+       child: CustomButton(
+           onPress: () {
+bloc.add(SendProductToCartEvent(productId: widget.getProductsData.id, amount: 1));
+           },
+           btnText: 'اضف للسلة',
+           width: 200.w,
+           height: 40.h),
+     );
+   }
+  },
+)
           ],
         ),
       ),

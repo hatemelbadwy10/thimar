@@ -115,7 +115,7 @@ abstract class AppRouter {
 
         builder: (context, state) => BlocProvider(
             create: (context) => CounterCubit(),
-            child:  ProductDescriptionView(id:1))),
+            child:  ProductDescriptionView(id:1, isFavourite: false,))),
 
     GoRoute(
       path: '/cartView',

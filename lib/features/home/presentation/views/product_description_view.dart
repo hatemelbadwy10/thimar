@@ -5,8 +5,8 @@ import 'package:thimar/features/home/presentation/views/widgets/product_descript
 import '../manger/counter_cubit/counter_cubit.dart';
 
 class ProductDescriptionView extends StatelessWidget {
-  const ProductDescriptionView({super.key, required this.id});
-
+  const ProductDescriptionView({super.key, required this.id, required this.isFavourite});
+final bool isFavourite;
   final int id;
 
   @override
@@ -14,7 +14,7 @@ class ProductDescriptionView extends StatelessWidget {
     return BlocProvider(
       create: (context) => CounterCubit(),
       child: Scaffold(
-        body: ProductDescriptionViewBody(id: id,),
+        body: ProductDescriptionViewBody(id: id, isFavourite: isFavourite,),
       ),
     );
   }

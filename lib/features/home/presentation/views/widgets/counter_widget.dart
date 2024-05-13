@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar/features/home/presentation/manger/counter_cubit/counter_cubit.dart';
+import 'package:thimar/features/home/presentation/manger/product_details_bloc/product_details_bloc.dart';
 import 'package:thimar/features/home/presentation/views/widgets/icon_widget.dart';
-class CounterWidget extends StatelessWidget {
+class CounterWidget extends StatefulWidget {
   const CounterWidget({super.key,  this.height,  this.width, this.iconWidth, this.iconHeight,  this.iconSize, this.color});
   final double? height;
   final double? width;
@@ -12,16 +14,25 @@ class CounterWidget extends StatelessWidget {
   final double? iconHeight;
   final double? iconSize;
   final Color? color;
+
+  @override
+  State<CounterWidget> createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> {
+  final bloc = KiwiContainer().resolve<ProductDetailsBloc>();
+
   @override
   Widget build(BuildContext context) {
     return  BlocBuilder<CounterCubit,int>(
+
       builder: (BuildContext context, state) {
       return Container(
-        width: width?? 120.w,
-        height: height?? 40.h,
+        width: widget.width?? 120.w,
+        height: widget.height?? 40.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: color?? Theme.of(context).colorScheme.primaryContainer
+            color: widget.color?? Theme.of(context).colorScheme.primaryContainer
         ),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
@@ -29,10 +40,10 @@ class CounterWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconWidget(
-                  height:iconHeight?? 29.h,
-                  width:iconWidth?? 29.w,
+                  height:widget.iconHeight?? 29.h,
+                  width:widget.iconWidth?? 29.w,
                   icon:  Icon(FontAwesomeIcons.plus,
-                  size: iconSize??18,
+                  size: widget.iconSize??18,
                   color: Theme.of(context).colorScheme.primary,
                   ), onPress: (){
                 BlocProvider.of<CounterCubit>(context).increment();
@@ -45,10 +56,10 @@ class CounterWidget extends StatelessWidget {
           height:29.h,
           width:29.w,
           icon:  Icon(FontAwesomeIcons.minus,
-              size: iconSize??18,
+              size: widget.iconSize??18,
               color: Theme.of(context).colorScheme.primary,
           ), onPress: (){
-            if(state ==1) {
+            if(state==1) {
 return null;
             }
             else{

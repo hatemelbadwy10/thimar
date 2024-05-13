@@ -32,9 +32,7 @@ body:{
   "user_type": "client"
 }
 );
-print("====================================  =============================");
-print(response.response!.data);
-print("====================================  =============================");
+
 if(response.success){
   await CacheHelper.saveLoginData(UserModel.fromJson(response.response!.data['data']));
 showSnackBar(response.msg);
