@@ -320,6 +320,145 @@ class _ProductDescriptionViewBodyState
    if(state3 is AddProductToCartLoading){
      return CircularProgressIndicator();
    }
+   else if(state3 is AddProductToCartSuccess){
+     return GestureDetector(
+       onTap: () {
+         addProductToCartBloc.add(SendProductToCartEvent(productId: widget.id, amount: 1));
+         showBottomSheet(context: context, builder: (BuildContext context){
+           return Container(
+
+             height: 220,
+             width: double.infinity,
+             decoration: const BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12))
+             ),
+             child: Padding(
+               padding: const EdgeInsets.all(12.0),
+               child: Column(
+                 children: [
+                   Row(
+                     children: [
+                       Container(
+                         height: 16,
+                         width: 16,
+                         decoration: BoxDecoration(
+                             color: Theme.of(context).colorScheme.primaryContainer,
+                             borderRadius: BorderRadius.circular(12)
+                         ),
+                         child:  Icon(Icons.check,
+                           color:Theme.of(context).colorScheme.primary,
+                         ),
+                       ),
+                       SizedBox(width: 12.w,),
+                       Text('تم إضافة المنتج بنجاح',
+                         style: Styles.textStyle14.copyWith(
+                             fontWeight: FontWeight.bold
+                         ),
+                       ),
+                     ],
+                   ),
+                   SizedBox(height:10.h),
+                   const Divider(thickness: .5,),
+                   Row(
+                     children: [
+                       SizedBox(
+                           height:64.h,
+                           width: 70.w,
+                           child: Image.network( state.productDetailsModel.mainImage)),
+                       SizedBox(width: 11.w,),
+                       Column(children: [
+                         Text(state.productDetailsModel.title,
+                           style: Styles.textStyle14,
+                         ),
+                         SizedBox(height: 5.h,),
+                         Text(
+                           counter.toString(),
+                           style: Styles.textStyle14.copyWith(
+                               color: Theme.of(context).colorScheme.secondary,
+                               fontWeight: FontWeight.w200
+                           ),
+
+
+                         ),
+                         SizedBox(width: 11.w,),
+                         Text('${counter*state.productDetailsModel.price}رس',
+                           style: Styles.textStyle14,
+                         ),
+
+                       ],),
+
+                     ],
+                   ),
+                   SizedBox(height: 8.h,),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       CustomButton(onPress: (){
+                         GoRouter.of(context).push(AppRouter.kCartView);
+                       //  addProductToCartBloc.add(SendProductToCartEvent(productId: state.productDetailsModel.id, amount: state.productDetailsModel.amount));
+
+                       }, btnText: 'التحويل إلى السلة',
+                         height: 40.h,
+                         width: 165.w,
+                       ),
+                       CustomButton(onPress: (){}, btnText: 'تصفح العروض',
+                         btnColor: Colors.white,
+                         btnTextColor: Theme.of(context).colorScheme.primary,
+                         height: 40.h,
+                         width: 165.w,
+                       )
+                     ],
+                   )
+
+
+                 ],
+               ),
+             )
+             ,
+           );
+
+         });
+       },
+       child: Container(
+         height: 80.h,
+         width: double.infinity,
+         decoration: BoxDecoration(
+             color: Theme.of(context).colorScheme.primary),
+         child: Padding(
+           padding: EdgeInsets.only(
+             right: 10.w,
+           ),
+           child: Row(
+             children: [
+               IconWidget(
+                   icon: const Icon(Icons.shopping_cart),
+                   onPress: () {
+
+
+                   }),
+               SizedBox(width: 10.w),
+               Text(
+                 'اضافة للسلة',
+                 style: Styles.textStyle15.copyWith(
+                     color: Colors.white,
+                     fontWeight: FontWeight.bold),
+               ),
+               SizedBox(
+                 width: 140.w,
+               ),
+               Text(
+                 '${counter*state.productDetailsModel.price}رس',
+                 style: Styles.textStyle15.copyWith(
+                     color: Colors.white,
+                     fontWeight: FontWeight.bold),
+               )
+             ],
+           ),
+         ),
+       ),
+     );
+   }
    else{
      return GestureDetector(
        onTap: () {
@@ -395,8 +534,9 @@ class _ProductDescriptionViewBodyState
                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
                        CustomButton(onPress: (){
-                       //  addProductToCartBloc.add(SendProductToCartEvent(productId: state.productDetailsModel.id, amount: state.productDetailsModel.amount));
-
+                        // GoRouter.of(context).push(AppRouter.kCartView);
+                         //  addProductToCartBloc.add(SendProductToCartEvent(productId: state.productDetailsModel.id, amount: state.productDetailsModel.amount));
+                         GoRouter.of(context).push(AppRouter.kCartView);
                        }, btnText: 'التحويل إلى السلة',
                          height: 40.h,
                          width: 165.w,
@@ -433,6 +573,7 @@ class _ProductDescriptionViewBodyState
                IconWidget(
                    icon: const Icon(Icons.shopping_cart),
                    onPress: () {
+
 
 
                    }),

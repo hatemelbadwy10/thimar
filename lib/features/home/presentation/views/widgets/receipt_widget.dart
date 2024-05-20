@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar/core/utils/styles.dart';
+import 'package:thimar/features/home/data/models/cart_model.dart';
 class ReceiptWidget extends StatelessWidget {
-  const ReceiptWidget({super.key});
-
+  const ReceiptWidget({super.key, required this.cartModel});
+final CartModel cartModel;
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -26,7 +27,7 @@ class ReceiptWidget extends StatelessWidget {
               ),
 
               ),
-              Text('رس 180',
+              Text('${cartModel.totalBeforeDiscount}رس',
               style: Styles.textStyle15.copyWith(
                 fontWeight: FontWeight.normal
               ),
@@ -44,7 +45,7 @@ class ReceiptWidget extends StatelessWidget {
                 ),
 
               ),
-              Text('رس 40-',
+              Text('${cartModel.totalDiscount}رس',
                 style: Styles.textStyle15.copyWith(
                     fontWeight: FontWeight.normal
                 ),
@@ -61,7 +62,7 @@ class ReceiptWidget extends StatelessWidget {
                 style: Styles.textStyle15
 
               ),
-              Text('رس 140',
+              Text('${cartModel.price}رس',
                 style: Styles.textStyle15
               ),
 

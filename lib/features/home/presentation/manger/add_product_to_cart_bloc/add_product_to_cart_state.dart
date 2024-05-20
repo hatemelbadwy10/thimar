@@ -14,7 +14,11 @@ final class AddProductToCartSuccess extends AddProductToCartState{
     );
   }
 }
-final class AddProductToCartLoading extends AddProductToCartState{}
+final class AddProductToCartLoading extends AddProductToCartState{
+  final int id;
+
+  AddProductToCartLoading({required this.id});
+}
 final class AddProductToCartFailure extends AddProductToCartState{
   final String msg;
 

@@ -3,17 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/features/home/presentation/manger/counter_cubit/counter_cubit.dart';
 import 'package:thimar/features/home/presentation/manger/product_details_bloc/product_details_bloc.dart';
 import 'package:thimar/features/home/presentation/views/widgets/icon_widget.dart';
 class CounterWidget extends StatefulWidget {
-  const CounterWidget({super.key,  this.height,  this.width, this.iconWidth, this.iconHeight,  this.iconSize, this.color});
+  const CounterWidget({super.key,  this.height,  this.width, this.iconWidth, this.iconHeight,  this.iconSize, this.color,this.counter});
   final double? height;
   final double? width;
   final double? iconWidth;
   final double? iconHeight;
   final double? iconSize;
   final Color? color;
+  final int? counter;
 
   @override
   State<CounterWidget> createState() => _CounterWidgetState();
@@ -51,7 +53,9 @@ class _CounterWidgetState extends State<CounterWidget> {
               },
                   color: Colors.white
               ),
-               Text('$state'),
+               Text('${widget.counter}',
+               style: Styles.textStyle10,
+               ),
               IconWidget(
           height:29.h,
           width:29.w,

@@ -12,7 +12,7 @@ class AddProductToCartBloc extends Bloc<AddProductToCartEvent, AddProductToCartS
 
   }
   void addProductToCart(SendProductToCartEvent event,Emitter<AddProductToCartState>emitter)async{
-    emit(AddProductToCartLoading());
+    emit(AddProductToCartLoading(id: event.productId));
     final response = await DioHelper().sendToServer(url: 'client/cart',
     body: {
       'product_id':event.productId,

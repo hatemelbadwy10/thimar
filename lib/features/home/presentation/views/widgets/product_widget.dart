@@ -75,7 +75,7 @@ class _ProductWidgetState extends State<ProductWidget> {
             BlocBuilder(
               bloc :bloc,
   builder: (context, state) {
-   if(state is AddProductToCartLoading){
+   if(state is AddProductToCartLoading&& state.id==widget.getProductsData.id){
      return CircularProgressIndicator();
    }
    else{
