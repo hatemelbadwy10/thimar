@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:thimar/core/utils/app_routers.dart';
-import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_button.dart';
 import 'package:thimar/features/home/data/models/product_model.dart';

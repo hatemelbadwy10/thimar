@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
+import 'package:thimar/features/notifactions_view/data/models/notifactions_model.dart';
 import 'package:thimar/features/notifactions_view/presentation/views/widgets/custom_notification_icon.dart';
 class CustomNotification extends StatelessWidget {
-  const CustomNotification({super.key, required this.notificationHeader, required this.notificationBody, required this.notificationTime});
-final String notificationHeader;
-final String notificationBody;
-final String notificationTime;
+  const CustomNotification({super.key, required this.notifications, });
+final Notifications notifications;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +26,10 @@ final String notificationTime;
                 child: Row(
 
                   children: [
-                    const CustomNotificationIcon(assetImage: AssetsData.logo),
+                     CustomNotificationIcon( notifications: notifications,),
                     SizedBox(width: 18.w,),
                     Text(
-                      notificationHeader,
+                      notifications.title,
                     style: Styles.textStyle12.copyWith(
                       color: Colors.black
                     ),),
@@ -39,7 +38,7 @@ final String notificationTime;
               ),
               Padding(
                 padding:  EdgeInsets.only(right: 53.w),
-                child: Text(notificationBody,
+                child: Text(notifications.body,
                 style: Styles.textStyle10.copyWith(
                   color: Theme.of(context).colorScheme.secondary
                 ),
@@ -50,7 +49,7 @@ final String notificationTime;
                 padding:  EdgeInsets.only(right: 53.w),
                 child: Align(
                   alignment: Alignment.bottomRight,
-                  child: Text(notificationTime,
+                  child: Text(notifications.createdAt,
                   style: Styles.textStyle10.copyWith(
                     color: Colors.black
                   ),

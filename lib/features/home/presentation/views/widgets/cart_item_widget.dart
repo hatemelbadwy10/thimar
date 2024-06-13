@@ -61,25 +61,13 @@ print("amount is ${amount} and id is ${id}");
       listener: (context, state) {
         if (state
         is UpdateCartSuccess) {
-          print("===============================================");
-          print(state);
-          print("==============================================");
-          _init();
+                 _init();
         }
         else if(state is UpdateCartFailure){
-          print("===============================================");
-          print(state);
-          print("==============================================");
-        }
+                }
         else if(state is UpdateCartLoading){
-          print("===============================================");
-          print(state);
-          print("==============================================");
         }
         else {
-          print("===============================================");
-          print('no state');
-          print("==============================================");
         }
       },
       child: Row(

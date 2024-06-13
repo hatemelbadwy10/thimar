@@ -89,7 +89,9 @@ class AddressViewBody extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
               dashPattern: const [12,6],
               child: GestureDetector(
-                onTap: (){},
+                onTap: (){
+
+                },
                 child: Container(
                   height: 60.h,
                   width: double.infinity,

@@ -8,7 +8,6 @@ import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/features/home/presentation/views/widgets/custom_header.dart';
 import 'package:thimar/features/profile/presentation/manger/about_bloc/about_bloc.dart';
-import 'package:thimar/features/profile/presentation/views/widgets/custom_text.dart';
 
 class AboutViewBody extends StatefulWidget {
   const AboutViewBody({super.key});

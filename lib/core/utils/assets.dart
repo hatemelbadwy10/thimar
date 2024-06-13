@@ -11,6 +11,7 @@ class AssetsData{
   static const address ='assets/images/address.png';
   static const profile2='assets/images/profile2.png';
   static const addressSec = 'assets/images/address3.png';
+  static const wallet = 'assets/images/wallet.png';
 
 
 }

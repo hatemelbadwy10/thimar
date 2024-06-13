@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_button.dart';
+import 'package:thimar/features/home/presentation/manger/orders/orders_bloc.dart';
+import 'package:thimar/features/home/presentation/manger/orders/orders_event.dart';
 import 'package:thimar/features/home/presentation/views/widgets/adress_widget.dart';
 import 'package:thimar/features/home/presentation/views/widgets/custom_header.dart';
 import 'package:thimar/features/home/presentation/views/widgets/order_widget.dart';
-import 'package:thimar/features/home/presentation/views/widgets/receipt_widget.dart';
-class OrderDetailsViewBody extends StatelessWidget {
-  const OrderDetailsViewBody({super.key});
 
+import '../../../data/models/orders.dart';
+class OrderDetailsViewBody extends StatefulWidget {
+  const OrderDetailsViewBody({super.key, required this.orderDetailsModel});
+final OrdersModel orderDetailsModel;
+
+  @override
+  State<OrderDetailsViewBody> createState() => _OrderDetailsViewBodyState();
+}
+final bloc =KiwiContainer().resolve<OrdersBloc>();
+
+class _OrderDetailsViewBodyState extends State<OrderDetailsViewBody> {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 16.0),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomAppBarSec(text: 'تفاصيل الطلب', onPress: (){
+            CustomAppBarSec(
+                text: 'تفاصيل الطلب', onPress: (){
               GoRouter.of(context).pop(AppRouter.kMyOrdersView);
             }),
-            const OrderWidget(status: 'in_progress'),
+             OrderWidget(orderDetailsModel: widget.orderDetailsModel),
             SizedBox(height: 16.h,),
             Text('عنوان التوصيل',
             style: Styles.textStyle17,
@@ -33,9 +45,9 @@ const AddressWidget(),
             Text('ملخص الطلب',
             style: Styles.textStyle17,),
             SizedBox(height: 16.h,),
-            const ReceiptFinishOrderWidget(),
-            SizedBox(height: 290.h,),
-            button('in_progress'),
+             ReceiptFinishOrderWidget(orderDetailsModel: widget.orderDetailsModel,),
+            SizedBox(height: 250.h,),
+            button(widget.orderDetailsModel.status),
 
 
           ],
@@ -43,32 +55,40 @@ const AddressWidget(),
       ),
     );
   }
+
   Widget button(String status) {
     switch (status) {
-      case 'in_progress':
-        return CustomButton(onPress: () {}, btnText: 'الغاء الطلب ',
+      case 'pending':
+        return CustomButton(onPress: () {
+          bloc.add(CancelOrderDataEvent(orderNum: widget.orderDetailsModel.id));
+        }, btnText: 'الغاء الطلب ',
           btnTextColor: Colors.red,
           btnColor: const Color(0xffFFE1E1),
         );
 
       case 'finished':
         return CustomButton(onPress: () {}, btnText: 'تقييم المنتجات');
-      case 'canceld':
-        return CustomButton(onPress: () {}, btnText: 'الغاء الطلب ');
+      case 'canceled':
+        return CustomButton(onPress: () {
+
+
+        }, btnText: 'تم اللغاء الطلب');
 
       default:
         return CustomButton(onPress: () {}, btnText: 'الغاء الطلب ',);
     }
 
 
+
   }
 }
 class ReceiptFinishOrderWidget extends StatelessWidget {
-  const ReceiptFinishOrderWidget({super.key, });
+  const ReceiptFinishOrderWidget({super.key, required this.orderDetailsModel, });
+  final OrdersModel orderDetailsModel;
   @override
   Widget build(BuildContext context) {
     return  Container(
-      height: 111.h,
+      height: 125.h,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -87,7 +107,7 @@ class ReceiptFinishOrderWidget extends StatelessWidget {
                 ),
 
               ),
-              Text('رس',
+              Text(' ${orderDetailsModel.orderPrice}رس',
                 style: Styles.textStyle15.copyWith(
                     fontWeight: FontWeight.normal
                 ),
@@ -98,14 +118,14 @@ class ReceiptFinishOrderWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('الخصم',
+              Text('التوصيل',
                 style: Styles.textStyle15.copyWith(
                     fontWeight: FontWeight.normal
 
                 ),
 
               ),
-              Text('}رس',
+              Text('${orderDetailsModel.deliveryPrice}رس',
                 style: Styles.textStyle15.copyWith(
                     fontWeight: FontWeight.normal
                 ),
@@ -122,14 +142,38 @@ class ReceiptFinishOrderWidget extends StatelessWidget {
                   style: Styles.textStyle15
 
               ),
-              Text('رس',
+              Text('رس${orderDetailsModel.totalPrice}',
                   style: Styles.textStyle15
               ),
-
-            ],
+                         ],
           ),
+          const Divider(height: 2,
+            thickness: 1,),
+          Center(
+            child: Text (
+              'تم الدفع بواسطه   ${payMethod(orderDetailsModel.payType,context)}',
+              style: Styles.textStyle15,
+
+            ),
+          )
+
         ],),
       ),
     );
   }
+  String payMethod(String status,BuildContext context) {
+    switch (status) {
+      case 'wallet':
+        return  'المحفظة';
+
+      case 'visa':
+        return 'Visa';
+
+      default:
+        return 'المحفظه';
+    }
+
+
+  }
+
 }

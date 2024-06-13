@@ -54,4 +54,5 @@ class CacheHelper {
   static Future removeLoginData() async {
     await _prefs.clear();
   }
+
 }

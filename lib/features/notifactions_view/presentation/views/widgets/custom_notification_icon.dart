@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thimar/features/notifactions_view/data/models/notifactions_model.dart';
 class CustomNotificationIcon extends StatelessWidget {
-  const CustomNotificationIcon({super.key, required this.assetImage});
-final String assetImage;
-  @override
+  const CustomNotificationIcon({super.key, required this.notifications, });
+final Notifications notifications;
+@override
   Widget build(BuildContext context) {
     return  Container(
 
@@ -17,7 +18,7 @@ final String assetImage;
         child: SizedBox(
             height: 19.5,
             width: 19.5,
-            child: Image.asset(assetImage)),
+            child: Image.network(notifications.image)),
       ),
     );
   }

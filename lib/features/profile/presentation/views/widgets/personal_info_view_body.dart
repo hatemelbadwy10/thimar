@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kiwi/kiwi.dart';
@@ -18,7 +16,6 @@ import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_button.dart';
 import 'package:thimar/features/home/presentation/views/widgets/custom_header.dart';
 import 'package:thimar/features/profile/presentation/manger/edit_pofile_bloc/edit_profile_bloc.dart';
-import 'package:thimar/features/profile/presentation/views/widgets/personal_widget.dart';
 
 class PersonalInfoViewBody extends StatefulWidget {
   const PersonalInfoViewBody({super.key});

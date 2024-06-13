@@ -35,6 +35,7 @@ void _getData(){
 }
 @override
   void initState() {
+    super.initState();
     // TODO: implement initState
     _getData();
   }

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:meta/meta.dart';
 import 'package:thimar/core/utils/dio_helper.dart';
 
@@ -11,6 +12,7 @@ class GetCartDataBloc extends Bloc<GetCartDataEvent, GetCartDataState> {
   GetCartDataBloc() : super(GetCartDataInitial()) {
    on<GetDataEvent>(getData);
   }
+
   void getData(GetDataEvent event,Emitter<GetCartDataState>emitter)async{
     emit(GetCartDataLoading());
     final response = await DioHelper().getFromServer(url: 'client/cart');
@@ -23,4 +25,5 @@ class GetCartDataBloc extends Bloc<GetCartDataEvent, GetCartDataState> {
       emit(GetCartDataFailure());
     }
   }
+
 }

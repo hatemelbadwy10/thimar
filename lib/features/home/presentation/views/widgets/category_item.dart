@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:thimar/core/utils/app_routers.dart';
-import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/features/home/data/models/categorys_model.dart';
 import 'package:thimar/features/home/presentation/views/category_view.dart';

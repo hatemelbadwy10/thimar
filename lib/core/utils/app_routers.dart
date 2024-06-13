@@ -14,10 +14,8 @@ import 'package:thimar/features/bottom_nav_bar/presentation/views/bottom_nav_bar
 import 'package:thimar/features/home/presentation/manger/counter_cubit/counter_cubit.dart';
 import 'package:thimar/features/home/presentation/views/cart_view.dart';
 import 'package:thimar/features/home/presentation/views/category_view.dart';
-import 'package:thimar/features/home/presentation/views/finish_order_view.dart';
 import 'package:thimar/features/home/presentation/views/home_view.dart';
 import 'package:thimar/features/home/presentation/views/my_orders_view.dart';
-import 'package:thimar/features/home/presentation/views/order_details__view.dart';
 import 'package:thimar/features/home/presentation/views/product_description_view.dart';
 import 'package:thimar/features/profile/presentation/views/about_view.dart';
 import 'package:thimar/features/profile/presentation/views/address_view.dart';
@@ -29,6 +27,7 @@ import 'package:thimar/features/profile/presentation/views/profile_view.dart';
 import 'package:thimar/features/profile/presentation/views/questions_view.dart';
 import 'package:thimar/features/profile/presentation/views/suggestions_view.dart';
 import 'package:thimar/features/profile/presentation/views/wallet_view.dart';
+import 'package:thimar/features/profile/presentation/views/widgets/add_address_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
@@ -56,6 +55,7 @@ abstract class AppRouter {
   static const kWalletView ='/walletView';
   static const kAllFinancialView ='/allFinancialView';
   static const kAddressView ='/addressView';
+  static const KAddAddressView= '/addAddressView';
 
 
 
@@ -87,11 +87,7 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: kConfirmPhoneSignUp,
-      builder: (context, state) => BlocProvider(
-          create: (BuildContext context) {
-            return CountDownCubit()..startCount();
-          },
-          child: const ConfirmSignupView()),
+      builder: (context, state) => const ConfirmSignupView(phone: '', pinCode: '',),
     ),
     GoRoute(
       path: kConfirmResetPassword,
@@ -122,18 +118,18 @@ abstract class AppRouter {
       builder: (context, state) => BlocProvider(
           create: (context) => CounterCubit(), child: const CartView()),
     ),
-    GoRoute(
-      path: '/finishOrderView',
-      builder: (context, state) => const FinishOrderView(),
-    ),
+    // GoRoute(
+    //   path: '/finishOrderView',
+    //   builder: (context, state) =>  FinishOrderView(cartModel: ,),
+    // ),
     GoRoute(
       path: '/myOrdersView',
       builder: (context, state) => const MyOrdersView(),
     ),
-    GoRoute(
-      path: '/orderDetailsView',
-      builder: (context, state) => const OrderDetailsView(),
-    ),
+    // GoRoute(
+    //   path: '/orderDetailsView',
+    //   builder: (context, state) => const OrderDetailsView(),
+    // ),
     GoRoute(
       path: '/categoryView',
       builder: (context, state) => const CategoryView(id: 1,),
@@ -179,5 +175,8 @@ abstract class AppRouter {
       path: '/addressView',
       builder: (context, state) => const AddressView(),
     ),
+        GoRoute(path: '/addAddressView',
+        builder: (context,state)=> const AddAddress()
+        )
   ]);
 }

@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_text_field.dart';
-import 'package:thimar/features/home/presentation/manger/get_rates_bloc/get_rates_bloc.dart';
 import 'package:thimar/features/home/presentation/manger/prdouct_bloc/product_bloc.dart';
 import 'package:thimar/features/home/presentation/views/widgets/category_last_view.dart';
 import 'package:thimar/features/home/presentation/views/widgets/custom_app_bar.dart';

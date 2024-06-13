@@ -7,11 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/features/profile/presentation/manger/logout_bloc/logout_bloc.dart';
-import 'package:thimar/features/profile/presentation/views/profile_view.dart';
 import 'package:thimar/features/profile/presentation/views/widgets/profile_list__view_item.dart';
 import 'package:thimar/features/profile/presentation/views/widgets/profile_photo_widget.dart';
 
-import '../../../../../core/widgets/helper_methods.dart';
 class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
 
@@ -54,7 +52,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
         ProfileListViewItem(title: 'تقييم التطبيق', icon: Icons.star_border_outlined, onPress: (){}),
         ProfileListViewItem(title: 'تسجيل الخروج', icon: Icons.logout, onPress: (){
           bloc.add(SendLogoutEvent());
-          BlocBuilder(
+          BlocConsumer(
           bloc: bloc,
           builder: (BuildContext context, state) {
             if(state is LogoutLoading){
@@ -62,7 +60,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             }
             else {
 
-              GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+
               return Padding(
                   padding: EdgeInsetsDirectional.symmetric(
                   horizontal: 16.w,
@@ -70,7 +68,11 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
               ),
               );
             }
-            },
+            }, listener: (BuildContext context, Object? state) {
+            if(state is LogoutSuccess){
+              GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+            }
+          },
           );
 
         }

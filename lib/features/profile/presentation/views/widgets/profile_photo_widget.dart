@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/cach_helper.dart';
 import 'package:thimar/core/utils/styles.dart';
   class ProfilePhotoWidget extends StatelessWidget {

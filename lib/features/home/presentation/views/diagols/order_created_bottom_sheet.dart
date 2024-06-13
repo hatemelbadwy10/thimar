@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:thimar/core/utils/app_routers.dart';
 import 'package:thimar/core/utils/assets.dart';
 import 'package:thimar/core/utils/styles.dart';
@@ -78,4 +80,16 @@ void orderCreatedSuccessfullyBottomSheet(BuildContext context){
       );
     },
   );
+}
+Future<String> getLocationFromLatLong(LatLng latLng) async {
+  List<Placemark> placemarks =
+  await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+
+  String x = '';
+  if (placemarks.isNotEmpty) {
+    print('-==-=-=-=-=-=-- ${placemarks.first.toJson()}');
+    x =
+    '${placemarks.first.street ?? ''} - ${placemarks.first.subAdministrativeArea ?? ''}';
+  }
+  return x;
 }

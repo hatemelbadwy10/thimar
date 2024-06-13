@@ -62,7 +62,7 @@ class _ImageSliderState extends State<ImageSlider> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            state!.data[currentIndex].media,
+                            state.data[currentIndex].media,
                             fit: BoxFit.cover,
                           ),
                         ),

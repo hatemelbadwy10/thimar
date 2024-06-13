@@ -14,7 +14,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   void getCategory(CategoryEvent event,Emitter<CategoryState>emitter)async{
     emit(CategoryLoading());
     final response = await DioHelper().getFromServer(url: 'categories');
-    print(response.response!.data);
     if(response.success){
       final model = CategoryModel.fromJson(response.response!.data);
       emit(CategorySuccess(categoryData: model.categoryData));
