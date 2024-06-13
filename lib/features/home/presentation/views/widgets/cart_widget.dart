@@ -15,7 +15,7 @@ class CartWidget extends StatelessWidget {
         color: Theme.of(context).colorScheme.primaryContainer,
 
       ),
-      child:  Icon(FontAwesomeIcons.lock,
+      child:  Icon(FontAwesomeIcons.cartShopping,
         color: theme(context).colorScheme.primary,),
 
     )

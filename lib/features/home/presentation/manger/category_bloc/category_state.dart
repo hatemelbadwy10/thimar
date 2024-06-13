@@ -11,3 +11,11 @@ final class CategoryLoading extends CategoryState{
   CategorySuccess({required this.categoryData});
 }
 final class CategoryFailure extends CategoryState{}
+
+class GetSearchDataSuccessState extends CategoryState {
+  final List<SearchResult> data;
+
+  GetSearchDataSuccessState({required this.data});
+}
+
+class GetSearchDataFailedState extends CategoryState {}

@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:thimar/core/utils/helper.dart';
 import 'package:thimar/core/utils/styles.dart';
 import 'package:thimar/core/widgets/custom_text_field.dart';
 import 'package:thimar/features/home/presentation/manger/prdouct_bloc/product_bloc.dart';
+import 'package:thimar/features/home/presentation/views/search_view.dart';
 import 'package:thimar/features/home/presentation/views/widgets/category_last_view.dart';
 import 'package:thimar/features/home/presentation/views/widgets/custom_app_bar.dart';
 import 'package:thimar/features/home/presentation/views/widgets/image_slider.dart';
@@ -32,12 +34,17 @@ class _HomeViewBodyState extends State<HomeViewBody> {
          child: Column( children: [
             const CustomAppBar(),
             SizedBox(height: 20.h,),
-            CustomTextField(
-              fill:true,
-              hint: 'ابحث عن ما تريد؟',
-              icon: const Icon(FontAwesomeIcons.search),
-              validatorWord: '',
-            color: Theme.of(context).colorScheme.primaryContainer,
+            GestureDetector(
+              onTap: (){
+                navigateTo(SearchView());
+              },
+              child: CustomTextField(
+                fill:true,
+                hint: 'ابحث عن ما تريد؟',
+                icon: const Icon(FontAwesomeIcons.search),
+                validatorWord: '',
+              color: Theme.of(context).colorScheme.primaryContainer,
+              ),
             ),
             SizedBox(height: 24.h,),
               const ImageSlider(),
